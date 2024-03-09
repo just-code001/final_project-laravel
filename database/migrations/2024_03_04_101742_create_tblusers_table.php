@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('tblusers', function (Blueprint $table) {
             $table->bigIncrements('user_id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->enum('type', ['staff', 'employee', 'admin']);
             $table->string('password');
             $table->string('adhaarcard_details')->nullable();
@@ -23,7 +22,6 @@ return new class extends Migration
             $table->decimal('salary', 10, 2);
             $table->string('status', 20);
             $table->boolean('isdeleted')->default(false);
-            $table->rememberToken();
         });
     }
 
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tblusers');
     }
 };
