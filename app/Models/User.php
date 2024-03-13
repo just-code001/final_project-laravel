@@ -18,9 +18,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
+     protected $primaryKey = 'user_id';
+     
+     public $timestamps = false;
+
     protected $fillable = [
         'name',
         'email',
+        'mobile_no',
         'password',
         'type',
         'adhaarcard_details',

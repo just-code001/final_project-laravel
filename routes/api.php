@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TbluserController;
 use App\Http\Controllers\CsrfTokenController;
 use App\Http\Controllers\TblclientController;
+use App\Http\Controllers\TblvenuesController;
+use App\Http\Controllers\StaffAndManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +32,14 @@ Route::post('/client/login', [TblclientController::class, 'login']);
 
 // admin routes =======
 Route::post('/admin/login',[TbluserController::class,"adminLogin"]);
+
+// staff and manager routes ==========
+Route::post('/admin/add-user',[StaffAndManagerController::class,'create']);
+Route::get('/admin/show-user/{user_id}',[StaffAndManagerController::class,'show']);
+Route::put('/admin/update-user/{user_id}',[StaffAndManagerController::class,'update']);
+Route::delete('/admin/delete-user/{user_id}',[StaffAndManagerController::class,'destroy']);
+Route::get('/admin/show-users',[StaffAndManagerController::class,'fetchUsers']);
+
+// venue ============================
+Route::post('/admin/venue/add-venue',[TblvenuesController::class,'createVenue']);
+
