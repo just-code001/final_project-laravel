@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Tblvenue_detail;
 
 class Tblvenues extends Model
 {
@@ -15,6 +16,6 @@ class Tblvenues extends Model
 
     public function detail()
     {
-        return $this->hasOne(VenueDetail::class,'venue_id','id');
+        return $this->hasOne(Tblvenue_detail::class,'venue_id','id');
     }
 }

@@ -40,6 +40,12 @@ Route::put('/admin/update-user/{user_id}',[StaffAndManagerController::class,'upd
 Route::delete('/admin/delete-user/{user_id}',[StaffAndManagerController::class,'destroy']);
 Route::get('/admin/show-users',[StaffAndManagerController::class,'fetchUsers']);
 
+Route::get('/admin/show-staff-users',[StaffAndManagerController::class,'fetchStaffUsers']);
+
 // venue ============================
 Route::post('/admin/venue/add-venue',[TblvenuesController::class,'createVenue']);
+Route::post('/admin/venue/update-venue/{id}',[TblvenuesController::class,'updateVenue']);
+Route::get('/admin/venue/show-venues',[TblvenuesController::class,'fetchAllVenuesAndDetails']);
+Route::delete('/admin/venue/delete-venue/{id}',[TblvenuesController::class,'destroyVenueAndDetail']);
+Route::get('/admin/venue/show-venue/{id}',[TblvenuesController::class,'fetchSepcificVenueAndDetail']);
 
