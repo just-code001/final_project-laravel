@@ -32,6 +32,18 @@ class StaffAndManagerController extends Controller
         return response()->json(['users' => $users, "status" => 1], 200);
     }
 
+
+    public function fetchManagerUsers()
+    {
+        // Fetch staff and employee details with isDeleted false
+        $users = User::where('type', '!=', 'admin')
+             ->where('type', '!=', 'staff')
+             ->where('isdeleted', false)
+             ->get();
+
+        return response()->json(['users' => $users, "status" => 1], 200);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -128,4 +128,12 @@ class TblclientController extends Controller
         }
     }
 
+    public function fetchClients()
+    {
+        // Fetch staff and employee details with isDeleted false
+        $client = Tblclient::all();
+
+        return response()->json(['client' => $client, "status" => 1], 200);
+    }
+
 }

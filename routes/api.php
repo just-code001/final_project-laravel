@@ -29,6 +29,7 @@ use App\Http\Controllers\StaffAndManagerController;
 Route::post('/client/register', [TblclientController::class, 'register']);
 Route::post('/client/verify-otp', [TblclientController::class, 'verifyOtp']);
 Route::post('/client/login', [TblclientController::class, 'login']);
+Route::get('/admin/show-clients',[TblclientController::class,'fetchClients']);
 
 // admin routes =======
 Route::post('/admin/login',[TbluserController::class,"adminLogin"]);
@@ -40,7 +41,8 @@ Route::put('/admin/update-user/{user_id}',[StaffAndManagerController::class,'upd
 Route::delete('/admin/delete-user/{user_id}',[StaffAndManagerController::class,'destroy']);
 Route::get('/admin/show-users',[StaffAndManagerController::class,'fetchUsers']);
 
-Route::get('/admin/show-staff-users',[StaffAndManagerController::class,'fetchStaffUsers']);
+Route::get('/manager/show-staff-users',[StaffAndManagerController::class,'fetchStaffUsers']);
+Route::get('/admin/show-manager-users',[StaffAndManagerController::class,'fetchManagerUsers']);
 
 // venue ============================
 Route::post('/admin/venue/add-venue',[TblvenuesController::class,'createVenue']);
