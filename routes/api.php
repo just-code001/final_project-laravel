@@ -7,6 +7,7 @@ use App\Http\Controllers\CsrfTokenController;
 use App\Http\Controllers\TblclientController;
 use App\Http\Controllers\TblvenuesController;
 use App\Http\Controllers\StaffAndManagerController;
+use App\Http\Controllers\TblvenueBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,4 +51,8 @@ Route::post('/admin/venue/update-venue/{id}',[TblvenuesController::class,'update
 Route::get('/admin/venue/show-venues',[TblvenuesController::class,'fetchAllVenuesAndDetails']);
 Route::delete('/admin/venue/delete-venue/{id}',[TblvenuesController::class,'destroyVenueAndDetail']);
 Route::get('/admin/venue/show-venue/{id}',[TblvenuesController::class,'fetchSepcificVenueAndDetail']);
+Route::get('/client/show-venue/{city}',[TblvenuesController::class,'getVenuesByCity']);
 
+// venue booking==========================
+Route::post('/client/venue/book-venue',[TblvenueBookingController::class,'createBooking']);
+Route::get('/admin/venue/show-venuebooking',[TblvenueBookingController::class,'fetchBookingsForAdmin']);

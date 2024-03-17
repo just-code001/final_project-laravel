@@ -79,10 +79,8 @@ class StaffAndManagerController extends Controller
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
-            return response([
-                "message" => $ex->getMessage(),
-                $user = null,
-            ]);
+             $ex->getMessage();
+                $user = null;
 
         }
 

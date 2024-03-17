@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Tblvenues;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tblvenue_detail extends Model
 {
@@ -15,6 +16,6 @@ class Tblvenue_detail extends Model
 
     public function venue()
     {
-        return $this->belongsTo(Venue::class,'venue_id','id');
+        return $this->belongsTo(Tblvenues::class,'venue_id','id');
     }
 }
