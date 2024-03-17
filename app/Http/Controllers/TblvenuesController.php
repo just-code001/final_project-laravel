@@ -290,4 +290,13 @@ class TblvenuesController extends Controller
         }
     }
 
+    public function getVenuesByCity($city)
+    {
+        $venues = Tblvenues::whereHas('details', function ($query) use ($city) {
+            $query->where('city', $city);
+        })->with('details')->get();
+
+        return response()->json(['venues' => $venues,"status"=>1]);
+    }
+
 }

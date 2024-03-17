@@ -86,7 +86,7 @@ class TblclientController extends Controller
                 'email_verified_at' => strtotime(now()),
             ]);
 
-            return response()->json(['message' => 'OTP verification successful', 'status' => 1, "affectef_row" => $affectedRows], 200);
+            return response()->json(["client"=>$client,'message' => 'OTP verification successful', 'status' => 1, "affectef_row" => $affectedRows], 200);
         } else {
             // OTP verification failed
             return response()->json(['message' => 'Invalid OTP', 'status' => 0], 200);
