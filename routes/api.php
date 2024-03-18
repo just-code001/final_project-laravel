@@ -30,7 +30,9 @@ use App\Http\Controllers\TblvenueBookingController;
 Route::post('/client/register', [TblclientController::class, 'register']);
 Route::post('/client/verify-otp', [TblclientController::class, 'verifyOtp']);
 Route::post('/client/login', [TblclientController::class, 'login']);
+Route::put('/client/profile/update-profile/{client_id}', [TblclientController::class, 'updateProfile']);
 Route::get('/admin/show-clients',[TblclientController::class,'fetchClients']);
+Route::get('/client/show-single-client/{client_id}',[TblclientController::class,'ftechSingleClient']);
 
 // admin routes =======
 Route::post('/admin/login',[TbluserController::class,"adminLogin"]);
@@ -56,3 +58,5 @@ Route::get('/client/show-venue/{city}',[TblvenuesController::class,'getVenuesByC
 // venue booking==========================
 Route::post('/client/venue/book-venue',[TblvenueBookingController::class,'createBooking']);
 Route::get('/admin/venue/show-venuebooking',[TblvenueBookingController::class,'fetchBookingsForAdmin']);
+Route::get('/admin/venue/show-single-venuebooking/{id}',[TblvenueBookingController::class,'fetchSepcificVenueBookingDetail']);
+Route::put('/admin/venue/update-payment-status/{id}',[TblvenueBookingController::class,'updatePaymentStatus']);

@@ -136,4 +136,67 @@ class TblclientController extends Controller
         return response()->json(['client' => $client, "status" => 1], 200);
     }
 
+    public function updateProfile(Request $request,string $client_id)
+    {
+        // Find the client by their ID
+        $client = Tblclient::find($client_id);
+
+        if (!$client) {
+            return response()
+                ->json([
+                    'error'  => 'client not found',
+                    "status" => 0,
+                ], 200);
+        }
+
+        // Validate the incoming request data
+        $request->validate([
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:tblclients,email',
+            'phno' => 'required|string|max:15|unique:tblclients,phno',
+            // You may add more validation rules as needed
+        ]);
+
+        // Update the client's profile with the validated data
+        DB::beginTransaction();
+        try {
+            $client->firstname               = $request->firstname;
+            $client->lastname              = $request->lastname;
+            $client->email          = $request->email;
+            $client->phno               = $request->phno;
+            $client->save();
+
+            DB::commit();
+
+            return response([
+                "client"=>$client,
+                "message" => "Client Data Updated Successfully.",
+                "status"  => 1,
+            ]);
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return response([
+                "message" => $ex->getMessage(),
+                "status"  => 0,
+            ]);
+        }
+    }
+
+    public function ftechSingleClient($id)
+    {
+        // Find venue by ID with its detail
+        $client = Tblclient::find($id);
+
+        // Check if client exists
+        if (!$client) {
+            return response()->json([
+                'error'  => 'client not found',
+                'status' => 0,
+            ], 200);
+        }
+
+        return response(["client" => $client, "status" => 1], 200);
+    }
+
 }

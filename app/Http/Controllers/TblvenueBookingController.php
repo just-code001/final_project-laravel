@@ -101,5 +101,54 @@ class TblvenueBookingController extends Controller
         return response()->json(['bookings' => $bookings, "status" => 0], 200);
     }
 
-    
+    public function fetchSepcificVenueBookingDetail($id)
+    {
+        // Find venue by ID with its detail
+        $venueBooking = Tblvenue_booking::find($id);
+
+        // Check if venue exists
+        if (!$venueBooking) {
+            return response()->json([
+                'error'  => 'Venue Booking not found',
+                'status' => 0,
+            ], 200);
+        }
+
+        return response(["venuebooking" => $venueBooking, "status" => 1], 200);
+    }
+
+    public function updatePaymentStatus(Request $request, string $id){
+        $venueBooking = Tblvenue_booking::find($id);
+
+        if (!$venueBooking) {
+            return response()
+                ->json([
+                    'error'  => 'venue Booking not found',
+                    "status" => 0,
+                ], 200);
+        }
+
+        $request->validate([
+            'payment_status'               => 'required|string|in:pending,completed',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $venueBooking->payment_status               = $request->payment_status;
+            $venueBooking->save();
+
+            DB::commit();
+
+            return response([
+                "message" => "Payment status Updated Successfully.",
+                "status"  => 1,
+            ]);
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return response([
+                "message" => $ex->getMessage(),
+                "status"  => 0,
+            ]);
+        }
+    }
 }

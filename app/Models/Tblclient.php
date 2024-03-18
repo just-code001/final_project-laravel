@@ -14,6 +14,8 @@ class Tblclient extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'client_id';
+
     protected $fillable = ['firstname', 'lastname', 'email', 'phno', 'email_verified_at', 'password', 'otp'];
 
     /**
@@ -23,4 +25,9 @@ class Tblclient extends Model
     {
         return $this->hasMany(Tblvenue_booking::class, 'client_id','client_id');
     }
+
+    protected $hidden = [
+        'password',
+        'otp',
+    ];
 }
