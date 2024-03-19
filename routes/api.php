@@ -6,6 +6,7 @@ use App\Http\Controllers\TbluserController;
 use App\Http\Controllers\CsrfTokenController;
 use App\Http\Controllers\TblclientController;
 use App\Http\Controllers\TblvenuesController;
+use App\Http\Controllers\TblconcertController;
 use App\Http\Controllers\StaffAndManagerController;
 use App\Http\Controllers\TblvenueBookingController;
 
@@ -60,3 +61,10 @@ Route::post('/client/venue/book-venue',[TblvenueBookingController::class,'create
 Route::get('/admin/venue/show-venuebooking',[TblvenueBookingController::class,'fetchBookingsForAdmin']);
 Route::get('/admin/venue/show-single-venuebooking/{id}',[TblvenueBookingController::class,'fetchSepcificVenueBookingDetail']);
 Route::put('/admin/venue/update-payment-status/{id}',[TblvenueBookingController::class,'updatePaymentStatus']);
+
+// concert ================================
+Route::post('/admin/event/concert/add-concert',[TblconcertController::class,'createConcert']);
+Route::post('/admin/event/concert/update-concert/{id}',[TblconcertController::class,'updateConcert']);
+Route::get('/admin/event/concert/show-concerts',[TblconcertController::class,'fetchAllConcerts']);
+Route::delete('/admin/event/concert/delete-concert/{id}',[TblconcertController::class,'destroyConcert']);
+Route::get('/admin/event/concert/show-concert/{id}',[TblconcertController::class,'fetchSepcificConcert']);
