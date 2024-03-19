@@ -62,6 +62,12 @@ Route::get('/admin/venue/show-venuebooking',[TblvenueBookingController::class,'f
 Route::get('/admin/venue/show-single-venuebooking/{id}',[TblvenueBookingController::class,'fetchSepcificVenueBookingDetail']);
 Route::put('/admin/venue/update-payment-status/{id}',[TblvenueBookingController::class,'updatePaymentStatus']);
 
+// concert ================================
+Route::post('/admin/event/concert/add-concert',[TblconcertController::class,'createConcert']);
+Route::post('/admin/event/concert/update-concert/{id}',[TblconcertController::class,'updateConcert']);
+Route::get('/admin/event/concert/show-concerts',[TblconcertController::class,'fetchAllConcerts']);
+Route::delete('/admin/event/concert/delete-concert/{id}',[TblconcertController::class,'destroyConcert']);
+Route::get('/admin/event/concert/show-concert/{id}',[TblconcertController::class,'fetchSepcificConcert']);
 Route::post('/admin/event/exhibition/add-event',[TblexihibitionController::class,'createExihibition']);
 Route::post('/admin/event/exhibition/update-event/{id}',[TblexihibitionController::class,'updateExihibition']);
 Route::delete('/admin/event/exhibition/delete-event/{id}',[TblexihibitionController::class,'destroyExihibition']);
