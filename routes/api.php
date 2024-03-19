@@ -8,6 +8,7 @@ use App\Http\Controllers\TblclientController;
 use App\Http\Controllers\TblvenuesController;
 use App\Http\Controllers\StaffAndManagerController;
 use App\Http\Controllers\TblvenueBookingController;
+use App\Http\Controllers\TblexihibitionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,12 @@ Route::post('/client/venue/book-venue',[TblvenueBookingController::class,'create
 Route::get('/admin/venue/show-venuebooking',[TblvenueBookingController::class,'fetchBookingsForAdmin']);
 Route::get('/admin/venue/show-single-venuebooking/{id}',[TblvenueBookingController::class,'fetchSepcificVenueBookingDetail']);
 Route::put('/admin/venue/update-payment-status/{id}',[TblvenueBookingController::class,'updatePaymentStatus']);
+
+Route::post('/admin/event/exhibition/add-event',[TblexihibitionController::class,'createExihibition']);
+Route::post('/admin/event/exhibition/update-event/{id}',[TblexihibitionController::class,'updateExihibition']);
+Route::delete('/admin/event/exhibition/delete-event/{id}',[TblexihibitionController::class,'destroyExihibition']);
+Route::get('/admin/event/exhibition/show-event/{id}',[TblexihibitionController::class,'fetchSpecificExihibition']);
+Route::get('/admin/event/exhibition/show-events',[TblexihibitionController::class,'fetchAllExihibition']);
+
+Route::get('/admin/event/exhibition/show-art-events',[TblexihibitionController::class,'fetchArtExihibition']);
+Route::get('/admin/event/exhibition/show-car-events',[TblexihibitionController::class,'fetchCarExihibition']);
