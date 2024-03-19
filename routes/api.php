@@ -10,6 +10,7 @@ use App\Http\Controllers\TblconcertController;
 use App\Http\Controllers\StaffAndManagerController;
 use App\Http\Controllers\TblvenueBookingController;
 use App\Http\Controllers\TblexihibitionController;
+use App\Http\Controllers\TblPackageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +78,12 @@ Route::get('/admin/event/exhibition/show-events',[TblexihibitionController::clas
 
 Route::get('/admin/event/exhibition/show-art-events',[TblexihibitionController::class,'fetchArtExihibition']);
 Route::get('/admin/event/exhibition/show-car-events',[TblexihibitionController::class,'fetchCarExihibition']);
+
+//package====================
+
+Route::post('/admin/event/birthday/add-package',[TblPackageController::class,'createPackage']);
+Route::post('/admin/event/birthday/update-package/{id}',[TblPackageController::class,'updatePackage']);
+Route::delete('/admin/event/birthday/delete-package/{id}',[TblPackageController::class,'destroyPackage']);
+Route::get('/admin/event/birthday/show-package/{id}',[TblPackageController::class,'fetchSpecificPackage']);
+Route::get('/admin/event/birthday/show-packages',[TblPackageController::class,'fetchAllPackage']);
+

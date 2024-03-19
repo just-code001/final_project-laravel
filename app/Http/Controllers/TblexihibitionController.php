@@ -53,19 +53,6 @@ class TblexihibitionController extends Controller
              // Create new exihibitionn detail
              DB::commit();
  
-            //  $exihibitionDetail = Tblexihibition::create([
-            //     'event_name' => $request->event_name,
-            //     'type' => $request->type,
-            //     'exhibition_image' => $uploaded,
-            //     'event_pricing' => $request->event_pricing,
-            //     'event_starting_date' => $request->event_starting_date,
-            //     'event_ending_date' => $request->event_ending_date,
-            //     'location' => $request->location,
-            //     'city' => $request->city,
-            //     'state' => $request->state,
-            // ]);
- 
-             DB::commit();
          } catch (\Exception $ex) {
              DB::rollBack();
  
