@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Tblvenue_booking;
+use App\Models\Tblconcertbooking;
+use Laravel\Sanctum\HasApiTokens;
+use App\Models\Tblexhibitionbooking;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Tblclient extends Model
 {
@@ -24,6 +26,16 @@ class Tblclient extends Model
     public function venueBookings()
     {
         return $this->hasMany(Tblvenue_booking::class, 'client_id','client_id');
+    }
+
+    public function concertBookings()
+    {
+        return $this->hasMany(Tblconcertbooking::class, 'client_id','client_id');
+    }
+
+    public function exhibitionBookings()
+    {
+        return $this->hasMany(Tblexhibitionbooking::class,'client_id','client_id');
     }
 
     protected $hidden = [
