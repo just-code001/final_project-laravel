@@ -10,7 +10,6 @@ use App\Http\Controllers\TblconcertController;
 use App\Http\Controllers\TblexihibitionController;
 use App\Http\Controllers\StaffAndManagerController;
 use App\Http\Controllers\TblvenueBookingController;
-use App\Http\Controllers\TblexihibitionController;
 use App\Http\Controllers\TblPackageController;
 use App\Http\Controllers\TblthemeController;
 use App\Http\Controllers\TblconcertbookingController;
