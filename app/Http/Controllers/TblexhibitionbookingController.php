@@ -92,4 +92,12 @@ class TblexhibitionbookingController extends Controller
             ], 500);
         }
     }
+    public function fetchExihibitionBookings()
+    {
+        // Fetch all venue bookings
+        $bookings = Tblexhibitionbooking::get();
+
+        // Return the bookings data
+        return response()->json(['bookings' => $bookings, "status" => 0], 200);
+    }
 }
