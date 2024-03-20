@@ -11,6 +11,7 @@ use App\Http\Controllers\StaffAndManagerController;
 use App\Http\Controllers\TblvenueBookingController;
 use App\Http\Controllers\TblexihibitionController;
 use App\Http\Controllers\TblPackageController;
+use App\Http\Controllers\TblthemeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,3 +88,10 @@ Route::delete('/admin/event/birthday/delete-package/{id}',[TblPackageController:
 Route::get('/admin/event/birthday/show-package/{id}',[TblPackageController::class,'fetchSpecificPackage']);
 Route::get('/admin/event/birthday/show-packages',[TblPackageController::class,'fetchAllPackage']);
 
+//themes=========================
+
+Route::post('/admin/event/birthday/add-theme',[TblthemeController::class,'createTheme']);
+Route::post('/admin/event/birthday/update-theme/{id}',[TblthemeController::class,'updateTheme']);
+Route::delete('/admin/event/birthday/delete-theme/{id}',[TblthemeController::class,'destroyTheme']);
+Route::get('/admin/event/birthday/show-theme/{id}',[TblthemeController::class,'fetchSpecificTheme']);
+Route::get('/admin/event/birthday/show-themes',[TblthemeController::class,'fetchAllTheme']);
