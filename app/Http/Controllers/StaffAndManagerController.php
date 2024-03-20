@@ -25,21 +25,20 @@ class StaffAndManagerController extends Controller
     {
         // Fetch staff and employee details with isDeleted false
         $users = User::where('type', '!=', 'admin')
-             ->where('type', '!=', 'manager')
-             ->where('isdeleted', false)
-             ->get();
+            ->where('type', '!=', 'manager')
+            ->where('isdeleted', false)
+            ->get();
 
         return response()->json(['users' => $users, "status" => 1], 200);
     }
-
 
     public function fetchManagerUsers()
     {
         // Fetch staff and employee details with isDeleted false
         $users = User::where('type', '!=', 'admin')
-             ->where('type', '!=', 'staff')
-             ->where('isdeleted', false)
-             ->get();
+            ->where('type', '!=', 'staff')
+            ->where('isdeleted', false)
+            ->get();
 
         return response()->json(['users' => $users, "status" => 1], 200);
     }
@@ -79,8 +78,8 @@ class StaffAndManagerController extends Controller
             DB::commit();
         } catch (\Exception $ex) {
             DB::rollBack();
-             $ex->getMessage();
-                $user = null;
+            $ex->getMessage();
+            $user = null;
 
         }
 
@@ -225,5 +224,41 @@ class StaffAndManagerController extends Controller
             ]);
         }
 
+    }
+
+    public function loginStaffOrManager(Request $request)
+    {
+        $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required',
+            'type'     => 'required|in:staff,manager,admin',
+        ]);
+
+        $user = User::where('email', $request->email)
+                    ->where('type', $request->type)
+                    ->first();
+
+        if ($user && Hash::check($request->password, $user->password)) {
+            if ($request->type === 'staff') {
+                return response([
+                    "staff"   => $user,
+                    "message" => "Staff login successful.",
+                    "status"  => 1,
+                    "usertype"=>'staff'
+                ], 200);
+            } elseif ($request->type === 'manager') {
+                return response([
+                    "manager" => $user,
+                    "message" => "Manager login successful.",
+                    "status"  => 1,
+                    "usertype"=>'manager'
+                ], 200);
+            }
+        }
+
+        return response([
+            "message" => "Provided credentials are incorrect.",
+            "status"  => 0,
+        ], 200);
     }
 }
