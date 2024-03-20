@@ -92,4 +92,13 @@ class TblconcertbookingController extends Controller
             ], 500);
         }
     }
+
+    public function fetchConcertBookings()
+    {
+        // Fetch all venue bookings
+        $bookings = Tblconcertbooking::get();
+
+        // Return the bookings data
+        return response()->json(['bookings' => $bookings, "status" => 0], 200);
+    }
 }

@@ -101,3 +101,8 @@ Route::post('/admin/event/birthday/update-theme/{id}',[TblthemeController::class
 Route::delete('/admin/event/birthday/delete-theme/{id}',[TblthemeController::class,'destroyTheme']);
 Route::get('/admin/event/birthday/show-theme/{id}',[TblthemeController::class,'fetchSpecificTheme']);
 Route::get('/admin/event/birthday/show-themes',[TblthemeController::class,'fetchAllTheme']);
+
+//Booking============================
+
+Route::get('/admin/event/exhibition/show-exihibition-booking',[TblexhibitionbookingController::class,'fetchExihibitionBookings']);
+Route::get('/admin/event/concert/show-concert-booking',[TblconcertbookingController::class,'fetchConcertBookings']);
