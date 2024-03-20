@@ -3,16 +3,18 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TbluserController;
+use App\Http\Controllers\TblthemeController;
 use App\Http\Controllers\CsrfTokenController;
 use App\Http\Controllers\TblclientController;
 use App\Http\Controllers\TblvenuesController;
 use App\Http\Controllers\TblconcertController;
+use App\Http\Controllers\TblPackageController;
 use App\Http\Controllers\TblexihibitionController;
 use App\Http\Controllers\StaffAndManagerController;
 use App\Http\Controllers\TblvenueBookingController;
-use App\Http\Controllers\TblPackageController;
-use App\Http\Controllers\TblthemeController;
 use App\Http\Controllers\TblconcertbookingController;
+use App\Http\Controllers\TblweddingbookingController;
+use App\Http\Controllers\TblbirthdaybookingController;
 use App\Http\Controllers\TblexhibitionbookingController;
 
 /*
@@ -67,6 +69,12 @@ Route::post('/client/venue/book-venue',[TblvenueBookingController::class,'create
 Route::get('/admin/venue/show-venuebooking',[TblvenueBookingController::class,'fetchBookingsForAdmin']);
 Route::get('/admin/venue/show-single-venuebooking/{id}',[TblvenueBookingController::class,'fetchSepcificVenueBookingDetail']);
 Route::put('/admin/venue/update-payment-status/{id}',[TblvenueBookingController::class,'updatePaymentStatus']);
+
+Route::post('/client/wedding/wedding-booking',[TblweddingbookingController::class,'createWeddingBooking']);
+Route::get('/admin/wedding/show-wedding-bookings',[TblweddingbookingController::class,'fetchBookingsForAdmin']);
+
+Route::post('/client/birthday/birthday-booking',[TblbirthdaybookingController::class,'createBirthdayBooking']);
+Route::get('/admin/birthday/show-birthday-bookings',[TblbirthdaybookingController::class,'fetchBirthdayBookingForAdmin']);
 
 // concert ================================
 Route::post('/admin/event/concert/add-concert',[TblconcertController::class,'createConcert']);
