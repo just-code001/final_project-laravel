@@ -35,7 +35,7 @@ class TbluserController extends Controller
             return response([
                 "message" => "The provided credentials are incorrect.",
                 "status" => 0,
-            ], 401);
+            ], 200);
         }
 
         // $token = $user->createToken('auth_token')->plainTextToken;
