@@ -15,6 +15,55 @@ class TblvenuesController extends Controller
     public function fetchAllVenuesAndDetails()
     {
         $venues = Tblvenues::with('detail')->where('isdeleted', false)->get();
+
+        return response()->json([
+            "venues" => $venues,
+            "status" => 1,
+        ], 200);
+    }
+
+    // fetch cities from tblvenues and details-----------
+    public function fetchCities()
+{
+    // Fetch distinct cities using the relationship
+    $cities = Tblvenues::join('tblvenue_details', 'tblvenues.id', '=', 'tblvenue_details.venue_id')
+                        ->select('tblvenue_details.city')
+                        ->distinct()
+                        ->pluck('tblvenue_details.city');
+
+    return response()->json(['cities' => $cities], 200);
+
+}
+
+    // fetch data for filter with city and price range----
+    public function fetchDatawithFilter(Request $request)
+    {
+        $validatedData = $request->validate([
+            'city' => 'nullable|string',
+            'price_range' => 'nullable|string',
+        ]);
+        
+        $query = Tblvenues::where('isdeleted', false);
+        
+        // Check if a city filter is applied
+        if ($request->has('city')) {
+            $query->whereHas('detail', function ($query) use ($request) {
+                $query->where('city', $request->city);
+            });
+        }
+        
+        // Check if price range filter is applied
+        if ($request->has('price_range')) {
+            $priceRange = explode(' to ', $request->price_range);
+            $minPrice   = $priceRange[0];
+            $maxPrice   = $priceRange[1];
+        
+            $query->whereBetween('price', [$minPrice, $maxPrice]);
+        }
+        
+        $venues = $query->with('detail')->paginate(9); // 9 venues per page
+        
+        // Format the response
         return response()->json([
             "venues" => $venues,
             "status" => 1,
@@ -177,7 +226,7 @@ class TblvenuesController extends Controller
             'name'             => 'required|string|max:255',
             'venue_category'   => 'required|string|max:255',
             'venue_image'      => 'nullable', // Example validation for image upload
-            'price'            => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0',
             'rating'           => 'required|numeric|min:0|max:5',
             'venue_capacity'   => 'required|string|max:255',
             'status'           => 'required|string|max:20',
@@ -296,7 +345,7 @@ class TblvenuesController extends Controller
             $query->where('city', $city);
         })->with('details')->get();
 
-        return response()->json(['venues' => $venues,"status"=>1]);
+        return response()->json(['venues' => $venues, "status" => 1]);
     }
 
 }

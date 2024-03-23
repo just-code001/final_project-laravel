@@ -62,7 +62,9 @@ Route::post('/admin/venue/update-venue/{id}',[TblvenuesController::class,'update
 Route::get('/admin/venue/show-venues',[TblvenuesController::class,'fetchAllVenuesAndDetails']);
 Route::delete('/admin/venue/delete-venue/{id}',[TblvenuesController::class,'destroyVenueAndDetail']);
 Route::get('/admin/venue/show-venue/{id}',[TblvenuesController::class,'fetchSepcificVenueAndDetail']);
-Route::get('/client/show-venue/{city}',[TblvenuesController::class,'getVenuesByCity']);
+// Route::get('/client/show-venue/{city}',[TblvenuesController::class,'getVenuesByCity']);
+Route::get('/client/show-venue',[TblvenuesController::class,'fetchDatawithFilter']);
+Route::get('/client/show-cities',[TblvenuesController::class,'fetchCities']);
 
 // venue booking==========================
 Route::post('/client/venue/book-venue',[TblvenueBookingController::class,'createBooking']);

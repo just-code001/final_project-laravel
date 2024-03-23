@@ -6,6 +6,7 @@ use App\Models\Tblexhibitionbooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Razorpay\Api\Api;
+use App\Rules\DateWithinExhibitionDates;
 
 class TblexhibitionbookingController extends Controller
 {
@@ -20,7 +21,12 @@ class TblexhibitionbookingController extends Controller
             'contact_number'  => 'required|string|max:20',
             'exhibition_name' => 'required|string|max:255',
             'no_of_tickets'   => 'required|integer|min:1',
-            'booking_date'    => 'required|date',
+            'booking_date'    => [
+                'required',
+                'date',
+                // Apply the custom validation rule for booking date within exhibition dates
+                new DateWithinExhibitionDates($request->exhibition_id),
+            ],
             'exhibition_type' => 'required|string|max:50|in:Art Exihibition,Car Exihibition',
             'price'           => 'required|numeric|min:0',
             'payment_id'      => 'nullable|string',
