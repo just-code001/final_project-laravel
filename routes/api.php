@@ -6,9 +6,11 @@ use App\Http\Controllers\TbluserController;
 use App\Http\Controllers\TblthemeController;
 use App\Http\Controllers\CsrfTokenController;
 use App\Http\Controllers\TblclientController;
+use App\Http\Controllers\TblreviewController;
 use App\Http\Controllers\TblvenuesController;
 use App\Http\Controllers\TblconcertController;
 use App\Http\Controllers\TblPackageController;
+use App\Http\Controllers\TblcontactUsController;
 use App\Http\Controllers\TblexihibitionController;
 use App\Http\Controllers\StaffAndManagerController;
 use App\Http\Controllers\TblvenueBookingController;
@@ -41,6 +43,10 @@ Route::post('/client/login', [TblclientController::class, 'login']);
 Route::put('/client/profile/update-profile/{client_id}', [TblclientController::class, 'updateProfile']);
 Route::get('/admin/show-clients',[TblclientController::class,'fetchClients']);
 Route::get('/client/show-single-client/{client_id}',[TblclientController::class,'ftechSingleClient']);
+Route::post('/client/login/forgot-password', [TblclientController::class,'forgotPassword']);
+Route::post('/client/login/reset-password', [TblclientController::class, 'resetPassword']);
+
+
 
 // admin routes =======
 Route::post('/admin/login',[TbluserController::class,"adminLogin"]);
@@ -116,3 +122,9 @@ Route::get('/admin/event/birthday/show-themes',[TblthemeController::class,'fetch
 
 Route::get('/admin/event/exhibition/show-exihibition-booking',[TblexhibitionbookingController::class,'fetchExihibitionBookings']);
 Route::get('/admin/event/concert/show-concert-booking',[TblconcertbookingController::class,'fetchConcertBookings']);
+
+Route::get('/admin/show-contact-us', [TblcontactUsController::class,'fetchContactUsDetails']);
+Route::post('/client/add-contact-us', [TblcontactUsController::class,'insertContactUs']);
+
+Route::get('/admin/show-reviews', [TblreviewController::class,'fetchReviewDetails']);
+Route::post('/client/add-review', [TblreviewController::class,'insertReview']);
