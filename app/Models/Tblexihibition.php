@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Tblexhibitionbooking;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tblexihibition extends Model
 {
@@ -13,4 +14,8 @@ class Tblexihibition extends Model
 
     protected $fillable = ['event_name', 'type', 'exhibition_image', 'event_pricing', 'event_starting_date', 'event_ending_date', 'location', 'city', 'state','isdeleted'];
 
+    public function exhibitionBookings()
+    {
+        return $this->hasMany(Tblexhibitionbooking::class, 'exhibition_id','id');
+    }
 }

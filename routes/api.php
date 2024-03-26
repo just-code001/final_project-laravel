@@ -3,14 +3,21 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TbluserController;
+use App\Http\Controllers\TblthemeController;
 use App\Http\Controllers\CsrfTokenController;
 use App\Http\Controllers\TblclientController;
+use App\Http\Controllers\TblreviewController;
 use App\Http\Controllers\TblvenuesController;
 use App\Http\Controllers\TblconcertController;
+use App\Http\Controllers\TblPackageController;
+use App\Http\Controllers\TblcontactUsController;
+use App\Http\Controllers\TblexihibitionController;
 use App\Http\Controllers\StaffAndManagerController;
 use App\Http\Controllers\TblvenueBookingController;
-use App\Http\Controllers\TblexihibitionController;
-use App\Http\Controllers\TblPackageController;
+use App\Http\Controllers\TblconcertbookingController;
+use App\Http\Controllers\TblweddingbookingController;
+use App\Http\Controllers\TblbirthdaybookingController;
+use App\Http\Controllers\TblexhibitionbookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +43,14 @@ Route::post('/client/login', [TblclientController::class, 'login']);
 Route::put('/client/profile/update-profile/{client_id}', [TblclientController::class, 'updateProfile']);
 Route::get('/admin/show-clients',[TblclientController::class,'fetchClients']);
 Route::get('/client/show-single-client/{client_id}',[TblclientController::class,'ftechSingleClient']);
+Route::post('/client/login/forgot-password', [TblclientController::class,'forgotPassword']);
+Route::post('/client/login/reset-password', [TblclientController::class, 'resetPassword']);
+
+
 
 // admin routes =======
 Route::post('/admin/login',[TbluserController::class,"adminLogin"]);
+Route::post('/staff-manager/login',[StaffAndManagerController::class,'loginStaffOrManager']);
 
 // staff and manager routes ==========
 Route::post('/admin/add-user',[StaffAndManagerController::class,'create']);
@@ -56,7 +68,9 @@ Route::post('/admin/venue/update-venue/{id}',[TblvenuesController::class,'update
 Route::get('/admin/venue/show-venues',[TblvenuesController::class,'fetchAllVenuesAndDetails']);
 Route::delete('/admin/venue/delete-venue/{id}',[TblvenuesController::class,'destroyVenueAndDetail']);
 Route::get('/admin/venue/show-venue/{id}',[TblvenuesController::class,'fetchSepcificVenueAndDetail']);
-Route::get('/client/show-venue/{city}',[TblvenuesController::class,'getVenuesByCity']);
+// Route::get('/client/show-venue/{city}',[TblvenuesController::class,'getVenuesByCity']);
+Route::get('/client/show-venue',[TblvenuesController::class,'fetchDatawithFilter']);
+Route::get('/client/show-cities',[TblvenuesController::class,'fetchCities']);
 
 // venue booking==========================
 Route::post('/client/venue/book-venue',[TblvenueBookingController::class,'createBooking']);
@@ -64,17 +78,26 @@ Route::get('/admin/venue/show-venuebooking',[TblvenueBookingController::class,'f
 Route::get('/admin/venue/show-single-venuebooking/{id}',[TblvenueBookingController::class,'fetchSepcificVenueBookingDetail']);
 Route::put('/admin/venue/update-payment-status/{id}',[TblvenueBookingController::class,'updatePaymentStatus']);
 
+Route::post('/client/wedding/wedding-booking',[TblweddingbookingController::class,'createWeddingBooking']);
+Route::get('/admin/wedding/show-wedding-bookings',[TblweddingbookingController::class,'fetchBookingsForAdmin']);
+
+Route::post('/client/birthday/birthday-booking',[TblbirthdaybookingController::class,'createBirthdayBooking']);
+Route::get('/admin/birthday/show-birthday-bookings',[TblbirthdaybookingController::class,'fetchBirthdayBookingForAdmin']);
+
 // concert ================================
 Route::post('/admin/event/concert/add-concert',[TblconcertController::class,'createConcert']);
 Route::post('/admin/event/concert/update-concert/{id}',[TblconcertController::class,'updateConcert']);
 Route::get('/admin/event/concert/show-concerts',[TblconcertController::class,'fetchAllConcerts']);
 Route::delete('/admin/event/concert/delete-concert/{id}',[TblconcertController::class,'destroyConcert']);
 Route::get('/admin/event/concert/show-concert/{id}',[TblconcertController::class,'fetchSepcificConcert']);
+Route::post('/client/event/concert/ticket/book-ticket',[TblconcertbookingController::class,'createBooking']);
+
 Route::post('/admin/event/exhibition/add-event',[TblexihibitionController::class,'createExihibition']);
 Route::post('/admin/event/exhibition/update-event/{id}',[TblexihibitionController::class,'updateExihibition']);
 Route::delete('/admin/event/exhibition/delete-event/{id}',[TblexihibitionController::class,'destroyExihibition']);
 Route::get('/admin/event/exhibition/show-event/{id}',[TblexihibitionController::class,'fetchSpecificExihibition']);
 Route::get('/admin/event/exhibition/show-events',[TblexihibitionController::class,'fetchAllExihibition']);
+Route::post('/client/event/exhibition/ticket/book-ticket',[TblexhibitionbookingController::class,'createExhibitionBooking']);
 
 Route::get('/admin/event/exhibition/show-art-events',[TblexihibitionController::class,'fetchArtExihibition']);
 Route::get('/admin/event/exhibition/show-car-events',[TblexihibitionController::class,'fetchCarExihibition']);
@@ -87,3 +110,21 @@ Route::delete('/admin/event/birthday/delete-package/{id}',[TblPackageController:
 Route::get('/admin/event/birthday/show-package/{id}',[TblPackageController::class,'fetchSpecificPackage']);
 Route::get('/admin/event/birthday/show-packages',[TblPackageController::class,'fetchAllPackage']);
 
+//themes=========================
+
+Route::post('/admin/event/birthday/add-theme',[TblthemeController::class,'createTheme']);
+Route::post('/admin/event/birthday/update-theme/{id}',[TblthemeController::class,'updateTheme']);
+Route::delete('/admin/event/birthday/delete-theme/{id}',[TblthemeController::class,'destroyTheme']);
+Route::get('/admin/event/birthday/show-theme/{id}',[TblthemeController::class,'fetchSpecificTheme']);
+Route::get('/admin/event/birthday/show-themes',[TblthemeController::class,'fetchAllTheme']);
+
+//Booking============================
+
+Route::get('/admin/event/exhibition/show-exihibition-booking',[TblexhibitionbookingController::class,'fetchExihibitionBookings']);
+Route::get('/admin/event/concert/show-concert-booking',[TblconcertbookingController::class,'fetchConcertBookings']);
+
+Route::get('/admin/show-contact-us', [TblcontactUsController::class,'fetchContactUsDetails']);
+Route::post('/client/add-contact-us', [TblcontactUsController::class,'insertContactUs']);
+
+Route::get('/admin/show-reviews', [TblreviewController::class,'fetchReviewDetails']);
+Route::post('/client/add-review', [TblreviewController::class,'insertReview']);

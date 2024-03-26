@@ -10,4 +10,11 @@ class Tblcontact_us extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    protected $fillable = [
+        'sender_name',
+        'sender_email',
+        'sender_contact',
+        'message',
+    ];
 }

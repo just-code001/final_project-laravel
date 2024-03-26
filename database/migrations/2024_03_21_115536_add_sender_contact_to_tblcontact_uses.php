@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tblexihibition_bookings', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('tblcontact_uses', function (Blueprint $table) {
+            $table->string('sender_contact', 255)->after('sender_name');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tblexihibition_bookings');
+        Schema::table('tblcontact_uses', function (Blueprint $table) {
+            $table->dropColumn('sender_contact');
+        });
     }
 };
