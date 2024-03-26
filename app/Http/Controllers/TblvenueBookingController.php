@@ -151,4 +151,19 @@ class TblvenueBookingController extends Controller
             ]);
         }
     }
+
+    public function fetchVenueBookingSpecificClient(string $client_id){
+        $booking = Tblvenue_booking::where('client_id',$client_id)->paginate(3);
+
+        // Check if booking exists
+        if (!$booking) {
+            return response()->json([
+                'error'  => 'booking not found',
+                'status' => 0,
+            ], 200);
+        }
+
+        return response(["booking" => $booking, "status" => 1], 200);
+
+    }
 }

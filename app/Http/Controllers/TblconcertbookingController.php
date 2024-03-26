@@ -101,4 +101,19 @@ class TblconcertbookingController extends Controller
         // Return the bookings data
         return response()->json(['bookings' => $bookings, "status" => 0], 200);
     }
+
+    public function fetchConcertBookingSpecificClient(string $client_id){
+        $concert_booking = Tblconcertbooking::where('client_id',$client_id)->paginate(3);
+
+        // Check if booking exists
+        if (!$concert_booking) {
+            return response()->json([
+                'error'  => 'concert booking not found',
+                'status' => 0,
+            ], 200);
+        }
+
+        return response(["concert_booking" => $concert_booking, "status" => 1], 200);
+
+    }
 }
