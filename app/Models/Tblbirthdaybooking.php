@@ -17,6 +17,7 @@ class Tblbirthdaybooking extends Model
     'email',
     'address',
     'contact_number',
+    'birthday_date',
     'city',
     'guest_list',
     'package_name',

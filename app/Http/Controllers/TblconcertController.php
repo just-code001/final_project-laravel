@@ -101,7 +101,7 @@ class TblconcertController extends Controller
             'event_name'      => 'required|string|max:255',
             'singer'          => 'required|string|max:255',
             'event_timing'    => 'required|string|max:255',
-            'concert_date'    => 'required|date',
+            'concert_date'    => 'required|date|after_or_equal:today',
             'city'            => 'required|string|max:255',
             'state'           => 'required|string|max:255',
             'pincode'         => 'required|string|max:10',

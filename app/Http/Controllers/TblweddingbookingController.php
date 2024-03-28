@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Tblweddingbooking;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TblweddingbookingController extends Controller
@@ -16,21 +16,29 @@ class TblweddingbookingController extends Controller
             'email'           => 'required|email|max:100',
             'address'         => 'required|string|max:255',
             'contact_number'  => 'required|string|max:20',
+            'wedding_date'    => 'required|date|after_or_equal:today',
             'city'            => 'required|string|max:100',
             'guest_list'      => 'required|string|max:255',
             'specialServices' => 'nullable|string',
         ]);
 
-        $bookingData = [
-            'client_id'       => $request->client_id,
-            'name'            => $request->name,
-            'email'           => $request->email,
-            'address'         => $request->address,
-            'contact_number'  => $request->contact_number,
-            'city'            => $request->city,
-            'guest_list'      => $request->guest_list,
-            'specialServices' => $request->specialServices,
-        ];
+        // $bookingData = [
+        //     'client_id'       => $request->client_id,
+        //     'name'            => $request->name,
+        //     'email'           => $request->email,
+        //     'address'         => $request->address,
+        //     'contact_number'  => $request->contact_number,
+        //     'wedding_date'    => $request->wedding_date,
+        //     'city'            => $request->city,
+        //     'guest_list'      => $request->guest_list,
+        //     'specialServices' => $request->specialServices,
+        // ];
+        $bookingData = $request->only([
+            'client_id', 'name', 'email', 'address', 'contact_number',
+            'wedding_date', 'city', 'guest_list', 'specialServices'
+        ]);
+
+        // dd($bookingData);
 
         DB::beginTransaction();
         try {
@@ -41,7 +49,7 @@ class TblweddingbookingController extends Controller
         } catch (\Exception $ex) {
             DB::rollBack();
             return response([
-                "message"=>$ex->getMessage(),
+                "message" => $ex->getMessage(),
                 $wedding = null,
             ]);
 
@@ -49,9 +57,9 @@ class TblweddingbookingController extends Controller
 
         if ($wedding != null) {
             return response([
-                'wedding'    => $wedding,
+                'wedding' => $wedding,
                 'message' => 'Wedding booking done successfully.',
-                'info'=>'We Will Contact You For Further Information.',
+                'info'    => 'We Will Contact You For Further Information.',
                 'status'  => 1,
             ], 201);
         } else {

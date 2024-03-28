@@ -20,13 +20,20 @@ class TblvenueBookingController extends Controller
             'contact_number'  => 'required|string|max:20',
             'venue_name'      => 'required|string|max:255',
             'no_of_guests'    => 'required|integer|min:1',
-            'checkin_date'    => 'required|date',
-            'checkout_date'   => 'required|date',
+            'checkin_date'    => 'required|date|after_or_equal:today',
+            'checkout_date'   => 'required|date|after:checkin_date',
             'price'           => 'required|numeric|min:0',
             'payment_id'      => 'nullable|string',
             'razorpay_id'     => 'nullable|string',
             'payment_status'  => 'nullable|string|in:pending,completed',
             'special_request' => 'nullable|string',
+        ],[
+            'checkin_date.required' => 'Checkin date is required.',
+            'checkin_date.date' => 'Checkin date must be a valid date.',
+            'checkin_date.after_or_equal' => 'Checkin date cannot be in the past.',
+            'checkout_date.required' => 'Checkout date is required.',
+            'checkout_date.date' => 'Checkout date must be a valid date.',
+            'checkout_date.after' => 'Checkout date must be after the checkin date.',
         ]);
 
         // Razorpay code to create order
@@ -63,6 +70,8 @@ class TblvenueBookingController extends Controller
             'payment_id'      => $payment_id,
             'special_request' => $request->special_request,
         ];
+
+        dd($bookingData);
 
         DB::beginTransaction();
         try {
