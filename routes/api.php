@@ -46,8 +46,6 @@ Route::get('/client/show-single-client/{client_id}',[TblclientController::class,
 Route::post('/client/login/forgot-password', [TblclientController::class,'forgotPassword']);
 Route::post('/client/login/reset-password', [TblclientController::class, 'resetPassword']);
 
-
-
 // admin routes =======
 Route::post('/admin/login',[TbluserController::class,"adminLogin"]);
 Route::post('/staff-manager/login',[StaffAndManagerController::class,'loginStaffOrManager']);
@@ -77,6 +75,7 @@ Route::post('/client/venue/book-venue',[TblvenueBookingController::class,'create
 Route::get('/admin/venue/show-venuebooking',[TblvenueBookingController::class,'fetchBookingsForAdmin']);
 Route::get('/admin/venue/show-single-venuebooking/{id}',[TblvenueBookingController::class,'fetchSepcificVenueBookingDetail']);
 Route::put('/admin/venue/update-payment-status/{id}',[TblvenueBookingController::class,'updatePaymentStatus']);
+Route::get('/client/venue/booking-detail/{client_id}',[TblvenueBookingController::class,'fetchVenueBookingSpecificClient']);
 
 Route::post('/client/wedding/wedding-booking',[TblweddingbookingController::class,'createWeddingBooking']);
 Route::get('/admin/wedding/show-wedding-bookings',[TblweddingbookingController::class,'fetchBookingsForAdmin']);
@@ -91,6 +90,7 @@ Route::get('/admin/event/concert/show-concerts',[TblconcertController::class,'fe
 Route::delete('/admin/event/concert/delete-concert/{id}',[TblconcertController::class,'destroyConcert']);
 Route::get('/admin/event/concert/show-concert/{id}',[TblconcertController::class,'fetchSepcificConcert']);
 Route::post('/client/event/concert/ticket/book-ticket',[TblconcertbookingController::class,'createBooking']);
+Route::get('/client/event/concert/ticket/show-ticket/{client_id}',[TblconcertbookingController::class,'fetchConcertBookingSpecificClient']);
 
 Route::post('/admin/event/exhibition/add-event',[TblexihibitionController::class,'createExihibition']);
 Route::post('/admin/event/exhibition/update-event/{id}',[TblexihibitionController::class,'updateExihibition']);
@@ -98,6 +98,7 @@ Route::delete('/admin/event/exhibition/delete-event/{id}',[TblexihibitionControl
 Route::get('/admin/event/exhibition/show-event/{id}',[TblexihibitionController::class,'fetchSpecificExihibition']);
 Route::get('/admin/event/exhibition/show-events',[TblexihibitionController::class,'fetchAllExihibition']);
 Route::post('/client/event/exhibition/ticket/book-ticket',[TblexhibitionbookingController::class,'createExhibitionBooking']);
+Route::get('/client/event/exhibition/show-ticket/{client_id}',[TblexhibitionbookingController::class,'fetchExhibitionBookingSpecificClient']);
 
 Route::get('/admin/event/exhibition/show-art-events',[TblexihibitionController::class,'fetchArtExihibition']);
 Route::get('/admin/event/exhibition/show-car-events',[TblexihibitionController::class,'fetchCarExihibition']);
