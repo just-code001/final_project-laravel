@@ -12,3 +12,6 @@ class Tbluser extends Model
     use HasApiTokens,HasFactory;
     public $timestamps = false;
 }
+
+
+

@@ -18,6 +18,8 @@ use App\Http\Controllers\TblconcertbookingController;
 use App\Http\Controllers\TblweddingbookingController;
 use App\Http\Controllers\TblbirthdaybookingController;
 use App\Http\Controllers\TblexhibitionbookingController;
+use App\Http\Controllers\TblupcomingconcertController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -129,3 +131,11 @@ Route::post('/client/add-contact-us', [TblcontactUsController::class,'insertCont
 
 Route::get('/admin/show-reviews', [TblreviewController::class,'fetchReviewDetails']);
 Route::post('/client/add-review', [TblreviewController::class,'insertReview']);
+
+// upcoming concert
+
+Route::post('/admin/concert/upcoming-concert',[TblupcomingconcertController::class,'createUpcomingConcert']);
+Route::post('/admin/concert/upcoming-concert/update-upcoming-concert/{id}',[TblupcomingconcertController::class,'updateUpcomingConcert']);
+Route::delete('/admin/concert/upcoming-concert/delete-upcoming-concert/{id}',[TblupcomingconcertController::class,'destroyUpcomingConcert']);
+Route::get('/admin/concert/upcoming-concert/show-upcom8ing-concert/{id}',[TblupcomingconcertController::class,'fetchSpecificUpcomingConcert']);
+Route::get('/admin/concert/upcoming-concert/show-upcoming-concert',[TblupcomingconcertController::class,'fetchAllUpcominConcert']);
