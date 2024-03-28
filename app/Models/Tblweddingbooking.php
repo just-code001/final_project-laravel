@@ -17,6 +17,7 @@ class Tblweddingbooking extends Model
     'email',
     'address',
     'contact_number',
+    'wedding_date',
     'city',
     'guest_list',
     'specialServices'];

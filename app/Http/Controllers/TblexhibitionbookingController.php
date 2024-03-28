@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tblexhibitionbooking;
+use App\Rules\DateWithinExhibitionDates;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Razorpay\Api\Api;
-use App\Rules\DateWithinExhibitionDates;
 
 class TblexhibitionbookingController extends Controller
 {
@@ -25,7 +25,7 @@ class TblexhibitionbookingController extends Controller
                 'required',
                 'date',
                 // Apply the custom validation rule for booking date within exhibition dates
-                new DateWithinExhibitionDates($request->exhibition_id),
+                new DateWithinExhibitionDates($request->exhibition_id),'after_or_equal:today'
             ],
             'exhibition_type' => 'required|string|max:50|in:Art Exihibition,Car Exihibition',
             'price'           => 'required|numeric|min:0',
@@ -107,8 +107,9 @@ class TblexhibitionbookingController extends Controller
         return response()->json(['bookings' => $bookings, "status" => 0], 200);
     }
 
-    public function fetchExhibitionBookingSpecificClient(string $client_id){
-        $exhibition_booking = Tblexhibitionbooking::where('client_id',$client_id)->paginate(3);
+    public function fetchExhibitionBookingSpecificClient(string $client_id)
+    {
+        $exhibition_booking = Tblexhibitionbooking::where('client_id', $client_id)->paginate(3);
 
         // Check if booking exists
         if (!$exhibition_booking) {
