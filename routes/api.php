@@ -15,10 +15,11 @@ use App\Http\Controllers\TblexihibitionController;
 use App\Http\Controllers\StaffAndManagerController;
 use App\Http\Controllers\TblvenueBookingController;
 use App\Http\Controllers\TblconcertbookingController;
+use App\Http\Controllers\TblspecialserviceController;
 use App\Http\Controllers\TblweddingbookingController;
 use App\Http\Controllers\TblbirthdaybookingController;
-use App\Http\Controllers\TblexhibitionbookingController;
 use App\Http\Controllers\TblupcomingconcertController;
+use App\Http\Controllers\TblexhibitionbookingController;
 
 
 /*
@@ -139,3 +140,10 @@ Route::post('/admin/concert/upcoming-concert/update-upcoming-concert/{id}',[Tblu
 Route::delete('/admin/concert/upcoming-concert/delete-upcoming-concert/{id}',[TblupcomingconcertController::class,'destroyUpcomingConcert']);
 Route::get('/admin/concert/upcoming-concert/show-upcom8ing-concert/{id}',[TblupcomingconcertController::class,'fetchSpecificUpcomingConcert']);
 Route::get('/admin/concert/upcoming-concert/show-upcoming-concert',[TblupcomingconcertController::class,'fetchAllUpcominConcert']);
+
+// special service api --------------
+Route::post('/admin/wedding/special-service/add-service',[TblspecialserviceController::class,'store']);
+Route::post('/admin/wedding/special-service/update-service/{id}',[TblspecialserviceController::class,'update']);
+Route::delete('/admin/wedding/special-service/delete-service/{id}',[TblspecialserviceController::class,'destroySpecialService']);
+Route::get('/admin/wedding/special-service/show-services',[TblspecialserviceController::class,'fetchAllSpecialServices']);
+Route::get('/admin/wedding/special-service/show-service/{id}',[TblspecialserviceController::class,'fetchSepcificConcert']);
