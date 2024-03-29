@@ -19,6 +19,7 @@ use App\Http\Controllers\TblweddingbookingController;
 use App\Http\Controllers\TblbirthdaybookingController;
 use App\Http\Controllers\TblexhibitionbookingController;
 use App\Http\Controllers\TblupcomingconcertController;
+use App\Http\Controllers\TblupcomingartController;
 
 
 /*
@@ -139,3 +140,11 @@ Route::post('/admin/concert/upcoming-concert/update-upcoming-concert/{id}',[Tblu
 Route::delete('/admin/concert/upcoming-concert/delete-upcoming-concert/{id}',[TblupcomingconcertController::class,'destroyUpcomingConcert']);
 Route::get('/admin/concert/upcoming-concert/show-upcom8ing-concert/{id}',[TblupcomingconcertController::class,'fetchSpecificUpcomingConcert']);
 Route::get('/admin/concert/upcoming-concert/show-upcoming-concert',[TblupcomingconcertController::class,'fetchAllUpcominConcert']);
+
+// upcoming art
+
+Route::post('/admin/concert/upcoming-art',[TblupcomingartController::class,'createUpcomingArt']);
+Route::post('/admin/concert/upcoming-art/update-upcoming-art/{id}',[TblupcomingartController::class,'updateUpcomingArt']);
+Route::delete('/admin/concert/upcoming-art/delete-upcoming-art/{id}',[TblupcomingartController::class,'destroyUpcomingArt']);
+Route::get('/admin/concert/upcoming-art/show-upcoming-art/{id}',[TblupcomingartController::class,'fetchSpecificUpcomingArt']);
+Route::get('/admin/concert/upcoming-art/show-upcoming-art',[TblupcomingartController::class,'fetchAllUpcomingArt']);

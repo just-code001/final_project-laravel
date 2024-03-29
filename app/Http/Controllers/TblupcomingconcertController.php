@@ -144,7 +144,7 @@ public function destroyUpcomingConcert(string $id)
            DB::commit();
  
            return response()->json([
-               "message" => "upcoming concer Deleted Successfully.",
+               "message" => "concert Deleted Successfully.",
                "status"  => 1,
            ]);
        } catch (\Exception $ex) {
