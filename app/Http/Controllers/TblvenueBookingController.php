@@ -71,8 +71,6 @@ class TblvenueBookingController extends Controller
             'special_request' => $request->special_request,
         ];
 
-        dd($bookingData);
-
         DB::beginTransaction();
         try {
             $booking = Tblvenue_booking::create($bookingData);
