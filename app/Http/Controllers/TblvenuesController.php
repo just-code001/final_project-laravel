@@ -28,6 +28,7 @@ class TblvenuesController extends Controller
     // Fetch distinct cities using the relationship
     $cities = Tblvenues::join('tblvenue_details', 'tblvenues.id', '=', 'tblvenue_details.venue_id')
                         ->select('tblvenue_details.city')
+                        ->where('tblvenue_details.isdeleted', 0) 
                         ->distinct()
                         ->pluck('tblvenue_details.city');
 
@@ -347,5 +348,41 @@ class TblvenuesController extends Controller
 
         return response()->json(['venues' => $venues, "status" => 1]);
     }
+
+
+    public function updateVenueStatus(Request $request, $id)
+{
+    // Validate the request data
+    $request->validate([
+        'status' => 'required|string|max:20', // Adjust the validation rules as per your requirements
+    ]);
+
+    // Find the venue by ID
+    $venue = Tblvenues::find($id);
+
+    // Check if the venue exists
+    if (!$venue) {
+        return response()->json([
+            'error' => 'Venue not found',
+            'status' => 0,
+        ], 404);
+    }
+
+    // Update the status of the venue
+    try {
+        $venue->update(['status' => $request->status]);
+
+        return response()->json([
+            'message' => 'Venue status updated successfully',
+            'status' => 1,
+        ], 200);
+    } catch (\Exception $ex) {
+        return response()->json([
+            'error' => 'Failed to update venue status',
+            'status' => 0,
+        ], 500);
+    }
+}
+
 
 }

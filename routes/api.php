@@ -80,6 +80,8 @@ Route::get('/admin/venue/show-venuebooking',[TblvenueBookingController::class,'f
 Route::get('/admin/venue/show-single-venuebooking/{id}',[TblvenueBookingController::class,'fetchSepcificVenueBookingDetail']);
 Route::put('/admin/venue/update-payment-status/{id}',[TblvenueBookingController::class,'updatePaymentStatus']);
 Route::get('/client/venue/booking-detail/{client_id}',[TblvenueBookingController::class,'fetchVenueBookingSpecificClient']);
+Route::put('admin/venue/update-status/{id}', [TblvenuesController::class, 'updateVenueStatus']);
+
 
 Route::post('/client/wedding/wedding-booking',[TblweddingbookingController::class,'createWeddingBooking']);
 Route::get('/admin/wedding/show-wedding-bookings',[TblweddingbookingController::class,'fetchBookingsForAdmin']);
