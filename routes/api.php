@@ -21,6 +21,7 @@ use App\Http\Controllers\TblbirthdaybookingController;
 use App\Http\Controllers\TblupcomingconcertController;
 use App\Http\Controllers\TblupcomingartController;
 use App\Http\Controllers\TblexhibitionbookingController;
+use App\Http\Controllers\TblupcommingcarController;
 
 
 /*
@@ -155,3 +156,15 @@ Route::post('/admin/wedding/special-service/update-service/{id}',[Tblspecialserv
 Route::delete('/admin/wedding/special-service/delete-service/{id}',[TblspecialserviceController::class,'destroySpecialService']);
 Route::get('/admin/wedding/special-service/show-services',[TblspecialserviceController::class,'fetchAllSpecialServices']);
 Route::get('/admin/wedding/special-service/show-service/{id}',[TblspecialserviceController::class,'fetchSepcificConcert']);
+
+
+//api for cars
+
+
+
+// Creating an upcoming car
+Route::post('/admin/cars/upcoming/add-car', [TblupcommingcarController::class, 'createUpcommingCar']);
+Route::post('/admin/cars/upcoming/update-car/{id}', [TblupcommingcarController::class, 'updateUpcommingCar']);
+Route::delete('/admin/cars/upcoming/delete-car/{id}', [TblupcommingcarController::class, 'destroyUpcommingCar']);
+Route::get('/admin/cars/upcoming/show-cars', [TblupcommingcarController::class, 'fetchAllUpcommingCars']);
+Route::get('/admin/cars/upcoming/show-car/{id}', [TblupcommingcarController::class, 'fetchSpecificUpcommingCar']);
